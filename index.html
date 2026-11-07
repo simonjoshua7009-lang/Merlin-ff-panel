@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09070b">
+<title>MERLIN FF PANEL</title>
+<style>
+:root{--red:#ff243d;--cyan:#56f6ff;--bg:#09070b;--panel:#151018;--muted:#a99da8}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#45101b 0,#100b12 42%,#070609 100%);color:#fff;font-family:system-ui,Arial,sans-serif;min-height:100vh}
+header{padding:24px 18px 12px;text-align:center}.logo{font-weight:1000;letter-spacing:4px;font-size:clamp(25px,7vw,42px);text-shadow:0 0 8px var(--red),0 0 24px #ff243d99}.sub{color:var(--muted);font-size:12px;letter-spacing:2px}
+.wrap{max-width:850px;margin:auto;padding:12px 15px 42px}.holo{position:relative;margin:15px auto 20px;max-width:520px;min-height:165px;border:1px solid #56f6ff88;border-radius:18px;background:linear-gradient(135deg,#56f6ff12,#ff243d12);display:grid;place-items:center;overflow:hidden;box-shadow:0 0 25px #56f6ff20,inset 0 0 25px #56f6ff12}
+.holo:before{content:"";position:absolute;inset:-80% -20%;background:repeating-linear-gradient(0deg,transparent 0 8px,#56f6ff13 9px 10px);transform:perspective(180px) rotateX(45deg);animation:scan 5s linear infinite}
+.holo:after{content:"";position:absolute;left:0;right:0;height:2px;background:#56f6ff;box-shadow:0 0 12px 4px #56f6ff88;animation:beam 3s ease-in-out infinite}
+@keyframes beam{0%,100%{top:12%}50%{top:88%}}@keyframes scan{to{transform:perspective(180px) rotateX(45deg) translateY(35px)}}
+.holo-inner{position:relative;z-index:1;text-align:center}.holo strong{font-size:25px;letter-spacing:5px;color:var(--cyan);text-shadow:0 0 12px var(--cyan)}.holo small{display:block;color:#c8ffff;letter-spacing:2px;margin-top:7px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:11px}.card{background:linear-gradient(145deg,#1c151f,#100d13);border:1px solid #ffffff18;border-radius:15px;padding:16px;box-shadow:0 8px 24px #0005}.card h2{font-size:15px;margin:0 0 12px;color:#fff}.wide{grid-column:1/-1}
+button,.btn{border:0;border-radius:10px;padding:13px 14px;font-weight:800;color:white;background:linear-gradient(100deg,#d90f2e,#ff3b4e);width:100%;cursor:pointer;text-align:center;text-decoration:none;display:block;margin:8px 0;box-shadow:0 4px 16px #ff243d30}
+.secondary{background:#211b27;border:1px solid #ffffff22;box-shadow:none}.cyan{background:linear-gradient(100deg,#087c89,#20cbd5);color:#041114}
+label{display:block;color:#c8bdc8;font-size:12px;margin:10px 0 5px}input,select{width:100%;background:#09070b;color:#fff;border:1px solid #ffffff2a;border-radius:9px;padding:11px;font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.note{font-size:12px;color:var(--muted);line-height:1.5}.status{font-size:12px;color:var(--cyan);min-height:18px}.footer{text-align:center;color:#766c78;font-size:11px;margin-top:22px}
+</style>
+</head>
+<body>
+<header><div class="logo">MERLIN FF PANEL</div><div class="sub">TACTICAL COMPANION • HOLOGRAM INTERFACE</div></header>
+<main class="wrap">
+<section class="holo"><div class="holo-inner"><strong>HOLOGRAM ONLINE</strong><small>PLAYER CONFIG • LOCAL PROFILE</small></div></section>
+<section class="grid">
+<div class="card wide"><h2>LAUNCH GAME</h2>
+<div class="row">
+<button onclick="launch('com.dts.freefireth')">OPEN FREE FIRE</button>
+<button class="cyan" onclick="launch('com.dts.freefiremax')">OPEN FREE FIRE MAX</button>
+</div><p class="note">Works on Android when the selected game is installed. If it does not open, use the install-page link below.</p>
+<div class="row"><a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.dts.freefireth">Free Fire install page</a><a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.dts.freefiremax">Free Fire MAX install page</a></div>
+</div>
+<div class="card"><h2>SENSITIVITY PROFILE</h2>
+<label>General</label><input id="general" type="number" min="0" max="200" value="95">
+<label>Red Dot</label><input id="redDot" type="number" min="0" max="200" value="90">
+<label>2x Scope</label><input id="scope2" type="number" min="0" max="200" value="85">
+<label>4x Scope</label><input id="scope4" type="number" min="0" max="200" value="80">
+<label>Sniper Scope</label><input id="sniper" type="number" min="0" max="200" value="50">
+<label>Free Look</label><input id="freeLook" type="number" min="0" max="200" value="75">
+</div>
+<div class="card"><h2>HUD & TRAINING</h2>
+<label>Fire button size (%)</label><input id="fireSize" type="number" min="1" max="100" value="48">
+<label>Training focus</label><select id="training"><option>Drag headshots</option><option>Tracking</option><option>Recoil control</option><option>Movement & gloo wall</option></select>
+<label>Daily practice minutes</label><input id="minutes" type="number" min="1" max="180" value="15">
+<p class="note">Use these as personal notes and practice targets. They do not change game files or activate cheats.</p>
+</div>
+<div class="card wide"><h2>LOCAL CONFIG.JSON</h2>
+<p class="note">Save your settings as <b>config.json</b>, or import a config file you already have. The browser only reads a file after you select it.</p>
+<div class="row"><button onclick="saveConfig()">EXPORT CONFIG.JSON</button><button class="secondary" onclick="document.getElementById('file').click()">IMPORT CONFIG.JSON</button></div>
+<input id="file" type="file" accept=".json,application/json" hidden onchange="loadConfig(event)">
+<div class="row"><button class="secondary" onclick="saveLocal()">SAVE ON THIS DEVICE</button><button class="secondary" onclick="loadLocal()">LOAD SAVED SETTINGS</button></div>
+<div id="status" class="status" aria-live="polite"></div>
+</div>
+</section>
+<div class="footer">MERLIN FF PANEL • Unofficial fan-made companion. Not affiliated with Garena.</div>
+</main>
+<script>
+const fields=['general','redDot','scope2','scope4','sniper','freeLook','fireSize','training','minutes'];
+function getConfig(){const settings={};fields.forEach(k=>settings[k]=document.getElementById(k).value);return {app:"MERLIN FF PANEL",version:1,settings};}
+function applyConfig(data){if(!data||!data.settings)throw new Error("Invalid config format");fields.forEach(k=>{if(data.settings[k]!==undefined)document.getElementById(k).value=data.settings[k];});}
+function msg(t){document.getElementById('status').textContent=t;}
+function saveConfig(){const blob=new Blob([JSON.stringify(getConfig(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='config.json';a.click();URL.revokeObjectURL(a.href);msg('config.json exported.');}
+function loadConfig(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{applyConfig(JSON.parse(r.result));msg('Config imported successfully.');}catch(err){msg('Could not read config.json: '+err.message);}};r.readAsText(f);e.target.value='';}
+function saveLocal(){localStorage.setItem('merlinFFConfig',JSON.stringify(getConfig()));msg('Settings saved in this browser on this device.');}
+function loadLocal(){const s=localStorage.getItem('merlinFFConfig');if(!s){msg('No saved settings found on this device.');return;}try{applyConfig(JSON.parse(s));msg('Saved settings loaded.');}catch(e){msg('Saved settings are invalid.');}}
+function launch(pkg){const url='intent://launch#Intent;scheme=android-app;package='+pkg+';end';window.location.href=url;setTimeout(()=>{msg('If the game did not open, check that it is installed or use its install-page link.');},1200);}
+loadLocal();
+</script>
+</body></html>

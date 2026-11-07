@@ -1,0 +1,15 @@
+{
+  "app": "MERLIN FF PANEL",
+  "version": 1,
+  "settings": {
+    "general": "95",
+    "redDot": "90",
+    "scope2": "85",
+    "scope4": "80",
+    "sniper": "50",
+    "freeLook": "75",
+    "fireSize": "48",
+    "training": "Drag headshots",
+    "minutes": "15"
+  }
+}
